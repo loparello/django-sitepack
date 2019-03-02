@@ -1,4 +1,5 @@
 {% load static wagtailuserbar %}
+{% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -18,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/sitepack.css' %}">
+        {% render_bundle 'main' 'css' 'DEFAULT' %}
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -31,7 +32,7 @@
         {% block content %}{% endblock %}
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/sitepack.js' %}"></script>
+        {% render_bundle 'main' 'js' 'DEFAULT' %}
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
