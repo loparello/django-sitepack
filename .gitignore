@@ -1,0 +1,21 @@
+.DS_Store
+
+### IDE ###
+/.vscode
+
+### Django ###
+*.log
+*.pot
+*.pyc
+.env
+__pycache__/
+local.py
+db.sqlite3
+media
+venv
+static
+
+### NPM and Webpack ###
+node_modules
+dev
+webpack-stats.json
