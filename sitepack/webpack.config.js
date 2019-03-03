@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleTracker = require('webpack-bundle-tracker');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
@@ -9,11 +10,16 @@ module.exports = (env, argv) => {
   return {
     entry: {
       main: './src/index.js',
-    //   home: './src/js/home.js'
+      home: './src/home.js'
     },
     output: {
       filename: isProduction ? '[name].[chunkhash].bundle.js' : '[name].bundle.js',
       path: outputPath
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      }
     },
     module: {
       rules: [
@@ -56,15 +62,26 @@ module.exports = (env, argv) => {
               }
             }
           ]
-        }
+        },
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader'
+        },
       ]
+    },
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js'
+      },
+      extensions: ['*', '.js', '.vue', '.json']
     },
     plugins: [
       new MiniCssExtractPlugin({
         filename: '[name].bundle.css',
         chunkFilename: '[id].bundle.css'
       }),
-      new BundleTracker({filename: './webpack-stats.json'})
+      new BundleTracker({filename: './webpack-stats.json'}),
+      new VueLoaderPlugin()
     ]
   };
 };
