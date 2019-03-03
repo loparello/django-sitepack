@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="hero">
     <p>Hero component mounted with Vue.js</p>
   </div>
 </template>

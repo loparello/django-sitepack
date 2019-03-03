@@ -5,23 +5,26 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block extra_css %}
-
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}"> -->
 {% endblock extra_css %}
 
+{% block extra_js %}
+    {# Home page javascript #}
+    {% render_bundle 'vendors~home' 'js' 'DEFAULT' %}
+    {% render_bundle 'home' 'js' 'DEFAULT' %}
+{% endblock extra_js %}
+
 {% block content %}
+<!-- {% include 'home/welcome_page.html' %} -->
 
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
+    <div id="app">
+        <hero></hero>
+    </div>
 
-{# Home page javascript #}
-{% render_bundle 'vendors~home' 'js' 'DEFAULT' %}
-{% render_bundle 'home' 'js' 'DEFAULT' %}
+    {# Home page javascript #}
+    <!-- {% render_bundle 'vendors~home' 'js' 'DEFAULT' %}
+    {% render_bundle 'home' 'js' 'DEFAULT' %} -->
 
 {% endblock content %}
+
 
